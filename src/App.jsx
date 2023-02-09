@@ -4,7 +4,7 @@ import ProjectDetails from "./pages/ProjectDetails";
 import Projects from "./pages/Projects";
 
 const client = new ApolloClient({
-  uri: "https://graphql-backend-mern.onrender.com/graphql",
+  uri: "https://graphql-mern-backend.herokuapp.com/graphql",
   cache: new InMemoryCache(),
 });
 
