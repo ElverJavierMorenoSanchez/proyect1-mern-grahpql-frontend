@@ -1,0 +1,26 @@
+name: Deploy to Hostinger
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "19.x"
+      - run: npm ci
+      - run: npm run build
+      - name: Deploy to Hostinger
+        uses: easingthemes/ssh-deploy@v2.1.5
+        with:
+          ssh-private-key: ${{ secrets.PRIVATE_KEY }}
+          remote_host: ${{ secrets.HOST }}
+          remote_user: ${{ secrets.USERNAME }}
+          local_path: "./dist"
+          remote_path: "public_html"
+          args: "-avz --delete"
